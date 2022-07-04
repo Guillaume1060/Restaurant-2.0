@@ -37,3 +37,20 @@ main
 {
     background-image: none;
 }
+
+#background_table
+{
+    width: 80%;
+    margin: auto;
+}
+
+#background_table, td, tr
+{
+    background-color: rgb(211, 199, 199);
+    color: black;
+    border: solid 1px;
+    text-align: center;
+    height: 1.3rem;
+}
+
+

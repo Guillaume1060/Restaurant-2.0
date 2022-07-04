@@ -47,36 +47,39 @@
     
 
     <section class="container">
+    <form method="post" action="backOffice.php">
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Prénom</span>
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="text" name="firstname" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
           </div>
           
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="family name" aria-label="Family name" aria-describedby="basic-addon2">
+            <input type="text" name="lastname" class="form-control" placeholder="family name" aria-label="Family name" aria-describedby="basic-addon2">
             <span class="input-group-text" id="basic-addon2">Nom</span>
           </div>
           
           <label for="basic-url" class="form-label text-light">Your Email Adress</label>
           <div class="input mb-5">
-            <input type="text" class="form-control" id="basic-url">
+            <input type="text" name="email" class="form-control" id="basic-url">
           </div>
           <label for="basic-url" class="form-label text-light">Quel sujet ?</label>
           <div class="input-group">
-          <select class="form-select mb-3" aria-label="Default select example">
-            <option selected>Vite vite réserver</option>
-            <option value="1">Je veux bosser chez vous!</option>
-            <option value="2">Bravo au chef !</option>
-            <option value="3">J'ai mal au ventre !</option>
+          <select name="select" class="form-select mb-3" aria-label="Default select example">
+            <option selected value="1">Vite vite réserver</option>
+            <option value="2">Je veux bosser chez vous!</option>
+            <option value="3">Bravo au chef !</option>
+            <option value="4">J'ai mal au ventre !</option>
           </select>
           
           <div class="input-group">
             <span class="input-group-text">Commentaires</span>
-            <textarea class="form-control" style="height:200px" aria-label="With textarea"></textarea>
+            <textarea name="comments" class="form-control" style="height:200px" aria-label="With textarea"></textarea>
           </div>  
           </div>
-
+          <button type="submit">Envoyer</button>
+    </form> 
+   
     </section>
 
 </main>
