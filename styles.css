@@ -1,0 +1,39 @@
+body
+{
+    background-image: url(photos/fondPrinciapl.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 70px;
+}
+
+main
+{
+    margin-bottom: 120px;
+} 
+
+#menu
+{
+    background-image: url(photos/fondMenu.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 70px;
+}
+
+#contact
+{
+    background-image: url(photos/contact.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(34,52,66);
+    margin-top: 140px;
+}
+
+#adresses
+{
+    margin-top: 200px;
+}
+
+#photos
+{
+    background-image: none;
+}
