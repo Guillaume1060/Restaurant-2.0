@@ -1,5 +1,5 @@
 <?php
-///CONNEXION TO THE DATABASE
+// ///CONNEXION TO THE DATABASE
 	$dbhost = "localhost";
 	$dbuser = "root";
 	$dbpass = "";
@@ -17,36 +17,48 @@
 $requete = $bdd->query('SELECT * FROM clients');
 
 
-/// UPDATE THE DATABASE WHEN A NEW MESSAGE IS SENT
-if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email'])){
-    
-    $firstName                  = $_POST['firstname'];
-    $lastName                   = $_POST['lastname'];
-    $email                      = $_POST['email'];
-    $type                       = $_POST['choix']; 
-    $comments                   = $_POST['comments'];
+/// UPDATE NEW PICTURES
+if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
 
+    $image = $_FILES['image'];
+    $error = 1;
+    echo exec('whoami'); 
+    echo '<br/>';
+
+
+
+    ///check taille
+    if ($image['size']<= 3000000)
+    {
+        // check Extension
+        $informationsImage = pathinfo($image['name']);
+        $extensionImage = $informationsImage['extension'];
+        $extensionsArray = array('jpg', 'png', 'jpeg', 'gif');
+        if (in_array($extensionImage,$extensionsArray))
+        {
+            echo $image['tmp_name'];
+            $adress = 'img/'.time().rand();
+            move_uploaded_file($image['tmp_name'], $adress);
+            $error = 0;
+        }
+    }
 
     /// si la condition est remplie (champ OK) on créé la requete, qu'on execute ensuite
-    $ajoutViaFormulaire = $bdd->prepare('INSERT INTO clients(firstname, lastname, email, choix, comments) 
-                            VALUES(?, ?, ?, ?, ?)') 
-                            or die(print_r($bdd->errorInfo()));
+    // $ajoutViaFormulaire = $bdd->prepare('INSERT INTO clients(firstname, lastname, email, choix, comments) 
+    //                         VALUES(?, ?, ?, ?, ?)') 
+    //                         or die(print_r($bdd->errorInfo()));
 
-    $ajoutViaFormulaire->execute(array($firstName, $lastName, $email, $type, $comments));
+    // $ajoutViaFormulaire->execute(array($firstName, $lastName, $email, $type, $comments));
 
     ///  Permet de ne pas multiplier les ajouts (rafraichir la page)
     // header('location: ../localhost/Restaurant-2.0/backOffice.php');
 
 }
-
 ////creation de la fonction supprimer
 
 // {
 //     $requete_supprimer = $bdd->exec('DELETE FROM clients WHERE username ="arnaud"');
 // }
-
-    
-
 
 
 ?>
@@ -68,16 +80,22 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
 <main>
 
 <h1 class="text-light text-center">BACK OFFICE MANAGEMENT</h1>
+<!-- DISPLAY UPLOADER -->
+<div id="CONTENER" class="text-light text-center m-5">
+    <article class="">
+        <h2 class="text-light">Ajoutez une image</h2>
+<form method="post" action="backOfficePictures.php" enctype="multipart/form-data">
+    <p>
+        <input type="file" name="image" required/>
+        <button type="submit">Upload</button>
+    </p>
+
+    
 <!-- DISPLAY AN ARRAY -->
     <table id="background_table">
         <tr>
-            <th>Id</th>
             <th>Date</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Subject</th>
-            <th>Comments</th>
+            <th>Name</th>
             <th>Delete</th>
         </tr>
 
@@ -85,19 +103,28 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
 <?php
 while ($donnees = $requete->fetch()){
 echo '  <tr>
-                <td>'.$donnees['id'].'</td>
                 <td>'.$donnees['date'].'</td>
                 <td>'.$donnees['firstname'].'</td>
-                <td>'.$donnees['lastname'].'</td>
-                <td>'.$donnees['email'].'</td>
-                <td>'.$donnees['choix'].'</td>
-                <td>'.$donnees['comments'].'</td>
                 <td>Click to delete</td>
         </tr>';
 }
 
 ?>
     </table>
+
+
+
+
+
+
+</form>
+
+
+
+
+    </article>
+</div>    
+
 
 </main>
 <footer class="bg-light opacity-75 text-center fixed-bottom">
@@ -108,13 +135,6 @@ echo '  <tr>
 
 
 </html>
-
-
-
-
-
-
-
 
 
 
