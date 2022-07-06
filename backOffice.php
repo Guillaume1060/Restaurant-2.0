@@ -34,8 +34,8 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
 
     $ajoutViaFormulaire->execute(array($firstName, $lastName, $email, $type, $comments));
 
-    ///  Permet de ne pas multiplier les ajouts (rafraichir la page)
-    // header('location: ../localhost/Restaurant-2.0/backOffice.php');
+    // ///  Permet de ne pas multiplier les ajouts (rafraichir la page)
+    header('location: ../Restaurant-2.0/backOffice.php');
 
 }
 

@@ -14,7 +14,7 @@
     }
 
 /// CATCH DATAS FROM DATABASE
-$requete = $bdd->query('SELECT * FROM clients');
+$requete = $bdd->query('SELECT * FROM images');
 
 
 /// UPDATE NEW PICTURES
@@ -37,28 +37,23 @@ if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
         if (in_array($extensionImage,$extensionsArray))
         {
             echo $image['tmp_name'];
-            $adress = 'img/'.time().rand();
+            $adress = 'lampp/htdocs/img/'.time().rand().$extensionImage;
             move_uploaded_file($image['tmp_name'], $adress);
             $error = 0;
         }
     }
 
-    /// si la condition est remplie (champ OK) on créé la requete, qu'on execute ensuite
-    // $ajoutViaFormulaire = $bdd->prepare('INSERT INTO clients(firstname, lastname, email, choix, comments) 
-    //                         VALUES(?, ?, ?, ?, ?)') 
-    //                         or die(print_r($bdd->errorInfo()));
 
-    // $ajoutViaFormulaire->execute(array($firstName, $lastName, $email, $type, $comments));
+    //// ici on récupère l'adresse pour l'utiliser en SRC du carroussel
+    if(isset($error) && $error ==0)
+    {
+      echo'<div class="carousel-item">';
+      echo'img src="'.$adress.'" class="d-block w-100" />';
+      echo '</div>';
+    }
 
-    ///  Permet de ne pas multiplier les ajouts (rafraichir la page)
-    // header('location: ../localhost/Restaurant-2.0/backOffice.php');
-
+  
 }
-////creation de la fonction supprimer
-
-// {
-//     $requete_supprimer = $bdd->exec('DELETE FROM clients WHERE username ="arnaud"');
-// }
 
 
 ?>
@@ -104,7 +99,7 @@ if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
 while ($donnees = $requete->fetch()){
 echo '  <tr>
                 <td>'.$donnees['date'].'</td>
-                <td>'.$donnees['firstname'].'</td>
+                <td>'.$donnees['name'].'</td>
                 <td>Click to delete</td>
         </tr>';
 }

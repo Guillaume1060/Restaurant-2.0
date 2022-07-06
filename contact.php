@@ -47,7 +47,7 @@
     
 
     <section class="container">
-    <form method="post" action="backOffice.php">
+    <form method="post" action="">
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Prénom</span>
