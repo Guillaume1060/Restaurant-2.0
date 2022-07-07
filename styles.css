@@ -27,6 +27,12 @@ main
     background-color: rgba(34,52,66);
     margin-top: 140px;
 }
+#backOffice
+{
+    background-size: cover;
+    background-color: rgba(34,52,66);
+    margin-top: 140px;
+}
 
 #adresses
 {

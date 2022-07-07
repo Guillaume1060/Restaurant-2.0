@@ -21,16 +21,19 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav me-auto mb-4 mb-lg-0">
                 <li class="nav-item bg-transparent">
-                  <a class="nav-link" aria-current="page" href="menu.html">Menu</a>
+                  <a class="nav-link" aria-current="page" href="menu.php">Menu</a>
                 </li>
                 <li class="nav-item bg-transparent">
-                  <a class="nav-link" href="photos.html">Photos</a>
+                  <a class="nav-link" href="photos.php">Photos</a>
                 </li>
                 <li class="nav-item bg-transparent">
-                  <a class="nav-link" href="adresses.html">Adresses</a>
+                  <a class="nav-link" href="adresses.php">Adresses</a>
                 </li>
                 <li class="nav-item bg-transparent">
-                  <a class="nav-link" href="contact.html">Contact</a>
+                  <a class="nav-link" href="contact.php">Contact</a>
+                </li>
+                <li class="nav-item bg-transparent">
+                  <a class="nav-link" href="guestBook.php">Guest Book</a>
                 </li>
             </ul>
       

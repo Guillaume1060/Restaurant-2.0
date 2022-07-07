@@ -1,5 +1,5 @@
 <?php
-// ///CONNEXION TO THE DATABASE
+///CONNEXION TO THE DATABASE
 	$dbhost = "localhost";
 	$dbuser = "root";
 	$dbpass = "";
@@ -11,67 +11,42 @@
         $bdd;
     } catch (Exception $e) {
         die('erreur: '.$e->getMessage());
+        echo 'coucou';
     }
 
 /// CATCH DATAS FROM DATABASE
-$requete = $bdd->query('SELECT * FROM images');
+$requete = $bdd->query('SELECT * FROM guestBook');
 
 
-/// UPDATE NEW PICTURES
-if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
+/// UPDATE THE DATABASE WHEN A NEW MESSAGE IS SENT
+if (!empty($_POST['guestname']) && !empty($_POST['restaurant']) && !empty($_POST['date'])){
+    
+    $guestname                  = $_POST['guestname'];
+    $restaurant                   = $_POST['restaurant'];
+    $dateVenu                      = $_POST['date'];
+    $comments                   = $_POST['comments'];
 
-    $image = $_FILES['image'];
-    $error = 1;
-    echo exec('whoami'); 
-    echo '<br/>';
-
-
-
-    ///check taille
-    if ($image['size']<= 3000000)
-    {
-        // check Extension  
-        $informationsImage = pathinfo($image['name']);
-        $extensionImage = $informationsImage['extension'];
-        $extensionsArray = array('jpg', 'png', 'jpeg', 'gif');
-        if (in_array($extensionImage,$extensionsArray))
-        {
-            echo $image['tmp_name'];
-            $adress = 'photos/'.$image['name'];
-            move_uploaded_file($image['tmp_name'], $adress);
-            $error = 0;
-        }
-    }
-
-
-/// UPDATE THE DATABASE WHEN A NEW PHOTO IS SENT
-    // $date                  = $image['date'];
-    $nom                   = $adress;
 
     /// si la condition est remplie (champ OK) on créé la requete, qu'on execute ensuite
-    $ajoutViaFormulaire = $bdd->prepare('INSERT INTO images(name) 
-                            VALUES(?)') 
+    $ajoutViaFormulaire = $bdd->prepare('INSERT INTO guestBook(guestname, restaurant, date, comments) 
+                            VALUES(?, ?, ?, ?)') 
                             or die(print_r($bdd->errorInfo()));
 
-    $ajoutViaFormulaire->execute(array($nom));
+    $ajoutViaFormulaire->execute(array($guestname, $restaurant, $dateVenu, $comments));
 
     // ///  Permet de ne pas multiplier les ajouts (rafraichir la page)
-    header('location: ../Restaurant-2.0/backOfficePictures.php');
+    header('location: ../Restaurant-2.0/guestBook.php');
 
 }
 
 
+////creation de la fonction supprimer
 
+// {
+//     $requete_supprimer = $bdd->exec('DELETE FROM clients WHERE username ="arnaud"');
+// }
 
-    //// ici on récupère l'adresse pour l'utiliser en SRC du carroussel
-    if(isset($error) && $error ==0)
-    {
-      echo'<div class="carousel-item">';
-      echo'img src="'.$adress.'" class="d-block w-100" />';
-      echo '</div>';
-    }
-
-  
+    
 
 
 
@@ -91,7 +66,6 @@ if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
 
   <header>
   </header>
-<main>
 
 <!-- Nav Bar -->
 <nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top">
@@ -106,10 +80,10 @@ if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
                   <a class="nav-link" aria-current="page" href="backOffice.php">Messages</a>
                 </li>
                 <li class="nav-item bg-transparent">
-                  <a class="nav-link text-danger" href="backOfficePictures.php">Photos</a>
+                  <a class="nav-link" href="backOfficePictures.php">Photos</a>
                 </li>
                 <li class="nav-item bg-transparent">
-                  <a class="nav-link" href="backOfficeGuestBook.php">Guestbook</a>
+                  <a class="nav-link text-danger" href="backOfficeGuestBook.php">Guestbook</a>
                 </li>
             </ul>
       
@@ -118,23 +92,22 @@ if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
 </nav>
 <!-- fin Nav bar -->
 
-<h1 class="text-light text-center">BACK OFFICE MANAGEMENT</h1>
-<!-- DISPLAY UPLOADER -->
-<div id="CONTENER" class="text-light text-center m-5">
-    <article class="">
-        <h2 class="text-light">Ajoutez une image</h2>
-<form method="post" action="backOfficePictures.php" enctype="multipart/form-data">
-    <p>
-        <input type="file" name="image" required/>
-        <button type="submit">Upload</button>
-    </p>
 
-    
+
+<main>
+
+
+
+<h1 class="text-light text-center">BACK OFFICE MANAGEMENT</h1>
+<h3> GUEST BOOK</h3>
 <!-- DISPLAY AN ARRAY -->
     <table id="background_table">
         <tr>
+            <th>Id</th>
+            <th>Guest Name</th>
+            <th>Restaurant</th>
             <th>Date</th>
-            <th>Name</th>
+            <th>Comments</th>
             <th>Delete</th>
         </tr>
 
@@ -142,28 +115,17 @@ if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
 <?php
 while ($donnees = $requete->fetch()){
 echo '  <tr>
+                <td>'.$donnees['id'].'</td>
+                <td>'.$donnees['guestname'].'</td>
+                <td>'.$donnees['restaurant'].'</td>
                 <td>'.$donnees['date'].'</td>
-                <td>'.$donnees['name'].'</td>
+                <td>'.$donnees['comments'].'</td>
                 <td>Click to delete</td>
         </tr>';
 }
 
 ?>
     </table>
-
-
-
-
-
-
-</form>
-
-
-
-
-    </article>
-</div>    
-
 
 </main>
 <footer class="bg-light opacity-75 text-center fixed-bottom">
@@ -174,9 +136,3 @@ echo '  <tr>
 
 
 </html>
-
-
-
-
-
-

@@ -17,7 +17,7 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-          <a class="navbar-brand fw-bold bg-danger text-center rounded p-3" href="index.html">DA ROSY</a>
+          <a class="navbar-brand fw-bold bg-danger text-center rounded p-3" href="index.php">DA ROSY</a>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav me-auto mb-4 mb-lg-0">
                 <li class="nav-item bg-transparent">
@@ -48,41 +48,66 @@
 <main>
     
     
-
+<h1 class="text-light text-center">GUEST BOOK</h1>
     <section class="container">
-    <form method="post" action="backOffice.php">
+    <form method="post" action="backOfficeGuestBook.php">
 
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Prénom</span>
-            <input type="text" name="firstname" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <span class="input-group-text" id="basic-addon1">Customer name</span>
+            <input type="text" name="guestname" class="form-control" placeholder="firstname & lastname" aria-label="Username" aria-describedby="basic-addon1">
           </div>
-          
-          <div class="input-group mb-3">
-            <input type="text" name="lastname" class="form-control" placeholder="family name" aria-label="Family name" aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2">Nom</span>
-          </div>
-          
-          <label for="basic-url" class="form-label text-light">Your Email Adress</label>
-          <div class="input mb-5">
-            <input type="text" name="email" class="form-control" id="basic-url">
-          </div>
-          <label for="basic-url" class="form-label text-light">Quel sujet ?</label>
+          <label for="basic-url" class="form-label text-light">Quel restaurant ?</label>
           <div class="input-group">
-          <select name="choix" class="form-select mb-3" aria-label="Default select example">
-            <option selected value="réservation">Vite vite réserver</option>
-            <option value="Demande d'embauche">Je veux bosser chez vous!</option>
-            <option value="félicitations">Bravo au chef !</option>
-            <option value="réclamations">J'ai mal au ventre !</option>
+          <select name="restaurant" class="form-select mb-3" aria-label="Default select example">
+            <option selected value="Da Rosy">Da Rosy - Brussels</option>
+            <option value="La Marinella">La Marinella - Cagliari</option>
           </select>
-          
+          <div class="input-group mb-3">
+          <label for="basic-url" class="form-label text-light">Quelle date ?</label>
+          <input class="" name="date" type="date" value="2022-08-01" min="2019-01-01" max="2030-12-31">
+          </div>
           <div class="input-group">
             <span class="input-group-text">Commentaires</span>
             <textarea name="comments" class="form-control" style="height:200px" aria-label="With textarea"></textarea>
           </div>  
           </div>
-          <button type="submit">Envoyer</button>
+          <button class="mt-3" type="submit">Envoyer</button>
     </form> 
-   
+    </section>
+
+
+    <section class="mt-4">
+    <h1 class="text-light text-center">ILS SONT PASSE(E)S CHEZ NOUS</h1>
+<!-- DISPLAY AN ARRAY -->
+    <table id="background_table">
+        <tr>
+            <th class="" style="width: 40px">Guest name</th>
+            <th class="" style="width: 40px">Restaurant</th>
+            <th style="width: 40px">Date</th>
+            <th style="width: 300px">Comments</th>
+        </tr>
+
+<!-- Loop for each columns -->
+<?php
+include "connexion_dataBase.php";
+$requete = $bdd->query('SELECT * FROM guestBook');
+
+while ($donnees = $requete->fetch()){
+  echo '  <tr>
+                  <td>'.$donnees['guestname'].'</td>
+                  <td>'.$donnees['restaurant'].'</td>
+                  <td>'.$donnees['date'].'</td>
+                  <td>'.$donnees['comments'].'</td>
+          </tr>';
+  }
+
+?>
+    </table>
+
+
+
+
+
     </section>
 
 </main>

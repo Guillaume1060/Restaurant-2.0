@@ -35,7 +35,7 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
     $ajoutViaFormulaire->execute(array($firstName, $lastName, $email, $type, $comments));
 
     // ///  Permet de ne pas multiplier les ajouts (rafraichir la page)
-    header('location: ../Restaurant-2.0/backOffice.php');
+    header('location: ../Restaurant-2.0/contact.php');
 
 }
 
@@ -65,6 +65,32 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
 
   <header>
   </header>
+
+  <!-- Nav Bar -->
+<nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top">
+  <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+          
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav me-auto mb-4 mb-lg-0">
+                <li class="nav-item bg-transparent">
+                  <a class="nav-link text-danger" aria-current="page" href="backOffice.php">Messages</a>
+                </li>
+                <li class="nav-item bg-transparent">
+                  <a class="nav-link" href="backOfficePictures.php">Photos</a>
+                </li>
+                <li class="nav-item bg-transparent">
+                  <a class="nav-link" href="backOfficeGuestBook.php">Guestbook</a>
+                </li>
+            </ul>
+      
+          </div>
+  </div>
+</nav>
+<!-- fin Nav bar -->
+
 <main>
 
 <h1 class="text-light text-center">BACK OFFICE MANAGEMENT</h1>
