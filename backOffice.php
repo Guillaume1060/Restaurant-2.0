@@ -39,15 +39,6 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
 
 }
 
-////creation de la fonction supprimer
-
-// {
-//     $requete_supprimer = $bdd->exec('DELETE FROM clients WHERE username ="arnaud"');
-// }
-
-    
-
-
 
 ?>
 <!DOCTYPE html>
