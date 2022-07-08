@@ -35,6 +35,10 @@
                 <li class="nav-item bg-transparent">
                   <a class="nav-link" href="guestBook.php">Guest Book</a>
                 </li>
+                <li class="nav-imtem text-light fw-bold rounded">
+                  <a class="nav-link" href="backOffice.php">Back Office</a>
+                </li>
+                
             </ul>
       
           </div>

@@ -22,8 +22,7 @@ if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
 
     $image = $_FILES['image'];
     $error = 1;
-    echo exec('whoami'); 
-    echo '<br/>';
+    
 
 
 
@@ -37,7 +36,7 @@ if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
         if (in_array($extensionImage,$extensionsArray))
         {
             echo $image['tmp_name'];
-            $adress = 'photos/'.$image['name'];
+            $adress = 'photos/'.$image['name'].time().'.'.$extensionImage;
             move_uploaded_file($image['tmp_name'], $adress);
             $error = 0;
         }
@@ -111,6 +110,9 @@ if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
                 <li class="nav-item bg-transparent">
                   <a class="nav-link" href="backOfficeGuestBook.php">Guestbook</a>
                 </li>
+                <li class="nav-imtem text-light fw-bold rounded">
+                  <a class="nav-link" href="index.php">Site Client</a>
+                </li>
             </ul>
       
           </div>
@@ -143,9 +145,11 @@ if (isset($_FILES['image']) && !empty($_FILES['image']['error']==0)){
 while ($donnees = $requete->fetch()){
 echo '  <tr>
                 <td>'.$donnees['date'].'</td>
-                <td>'.$donnees['name'].'</td>
-                <td>Click to delete</td>
-        </tr>';
+                <td>'.$donnees['name'].'</td>'
+                ?>
+                <td><a href="deletePictures.php?id=<?php echo $donnees['id']; ?>" style="text-decoration:none">Delete</a></td>
+        </tr>
+<?php
 }
 
 ?>

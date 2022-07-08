@@ -75,6 +75,9 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['
                 <li class="nav-item bg-transparent">
                   <a class="nav-link" href="backOfficeGuestBook.php">Guestbook</a>
                 </li>
+                <li class="nav-imtem text-light fw-bold rounded">
+                  <a class="nav-link" href="index.php">Site Client</a>
+                </li>
             </ul>
       
           </div>
@@ -108,11 +111,12 @@ echo '  <tr>
                 <td>'.$donnees['lastname'].'</td>
                 <td>'.$donnees['email'].'</td>
                 <td>'.$donnees['choix'].'</td>
-                <td>'.$donnees['comments'].'</td>
-                <td>Click to delete</td>
-        </tr>';
+                <td>'.$donnees['comments'].'</td>'
+?>
+                <td><a href="delete.php?id=<?php echo $donnees['id']; ?>" style="text-decoration:none">Delete</a></td>
+        </tr>;
+<?php
 }
-
 ?>
     </table>
 

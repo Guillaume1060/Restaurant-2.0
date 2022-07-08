@@ -17,7 +17,7 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-          <a class="navbar-brand fw-bold bg-danger text-center rounded p-3" href="index.html">DA ROSY</a>
+          <a class="navbar-brand fw-bold bg-danger text-center rounded p-3" href="index.php">DA ROSY</a>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav me-auto mb-4 mb-lg-0">
                 <li class="nav-item bg-transparent">
@@ -32,8 +32,10 @@
                 <li class="nav-item bg-transparent">
                   <a class="nav-link" href="contact.php">Contact</a>
                 </li>
-                <li class="nav-item bg-transparent">
                   <a class="nav-link" href="guestBook.php">Guest Book</a>
+                </li>
+                <li class="nav-imtem text-light fw-bold rounded">
+                  <a class="nav-link" href="backOffice.php">Back Office</a>
                 </li>
             </ul>
       
