@@ -18,7 +18,7 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
 	$dbhost = "localhost";
 	$dbuser = "root";
 	$dbpass = "";
-	$db = "restaurant";
+	$db = "heroku_fcff334a74162";
 
 	$bdd = new PDO("mysql:host=$dbhost;dbname=$db",$dbuser,$dbpass);
 	
